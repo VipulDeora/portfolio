@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useMemo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Mail, ArrowRight } from "lucide-react";
@@ -32,13 +32,6 @@ function Hero() {
 function AssemblySpine({ scrollYProgress }) {
   const steps = ["Signal", "Decision", "Action", "Outcome", "Feedback"];
   
-  // Highlight calculations based on scroll progress
-  // 0.0 - 0.2: Signal
-  // 0.2 - 0.4: Decision
-  // 0.4 - 0.6: Action
-  // 0.6 - 0.8: Outcome
-  // 0.8 - 1.0: Feedback
-
   return (
     <div className="absolute top-12 left-0 right-0 z-20 px-5 md:px-10 max-w-7xl mx-auto">
       <div className="relative flex justify-between items-center">
@@ -53,7 +46,6 @@ function AssemblySpine({ scrollYProgress }) {
 
         {steps.map((step, index) => {
           const stepStart = index * 0.2;
-          const stepActive = stepStart + 0.1;
           const stepEnd = (index + 1) * 0.2;
           
           const opacity = useTransform(
@@ -92,24 +84,25 @@ function AssemblySpine({ scrollYProgress }) {
 function LayerSignal({ progress }) {
   const opacity = useTransform(progress, [0, 0.05, 0.15, 0.2], [0, 1, 1, 0]);
   const y = useTransform(progress, [0, 0.05, 0.15, 0.2], [50, 0, 0, -50]);
+  
+  const signals = useMemo(() => Array.from({ length: 40 }).map(() => ({
+    x: Math.random() * 400,
+    y: Math.random() * 400,
+    duration: 3 + Math.random() * 2
+  })), []);
 
   return (
     <motion.div style={{ opacity, y }} className="absolute inset-0 flex items-center justify-center pointer-events-none">
       <div className="grid md:grid-cols-2 gap-20 max-w-7xl px-10 items-center w-full">
         <div className="relative h-[400px] w-full border border-[#B9AD9B]/30 rounded-3xl bg-[#FBF8F0]/40 overflow-hidden">
           <Texture />
-          {/* Visual Metaphor: Scattered Signals */}
-          {Array.from({ length: 40 }).map((_, i) => (
+          {signals.map((sig, i) => (
             <motion.div
               key={i}
               className="absolute w-1.5 h-1.5 bg-[#2F4D72] rounded-full"
-              initial={{ x: Math.random() * 400, y: Math.random() * 400, opacity: 0.2 }}
-              animate={{ 
-                x: Math.random() * 400, 
-                y: Math.random() * 400,
-                opacity: 0.8
-              }}
-              transition={{ duration: 3 + Math.random() * 2, repeat: Infinity, repeatType: "reverse", ease: "linear" }}
+              style={{ left: sig.x, top: sig.y }}
+              animate={{ opacity: [0.2, 0.8, 0.2] }}
+              transition={{ duration: sig.duration, repeat: Infinity, ease: "linear" }}
             />
           ))}
         </div>
@@ -131,6 +124,11 @@ function LayerDecision({ progress }) {
   const opacity = useTransform(progress, [0.15, 0.2, 0.35, 0.4], [0, 1, 1, 0]);
   const y = useTransform(progress, [0.15, 0.2, 0.35, 0.4], [50, 0, 0, -50]);
 
+  const lines = useMemo(() => Array.from({ length: 12 }).map(() => ({
+    x1: Math.random() > 0.5 ? 0 : 400,
+    y1: Math.random() * 400
+  })), []);
+
   return (
     <motion.div style={{ opacity, y }} className="absolute inset-0 flex items-center justify-center pointer-events-none">
       <div className="grid md:grid-cols-2 gap-20 max-w-7xl px-10 items-center w-full">
@@ -142,20 +140,19 @@ function LayerDecision({ progress }) {
           <p className="mt-6 text-lg leading-8 text-[#4F4A43]">
             Operational systems turn ambiguity into a decision model. Proof is architectural.
           </p>
-          <Link to="/#systems" className="mt-8 inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] font-semibold text-[#2F4D72] hover:text-[#171513]">
+          <Link to="/systems/portfolio-growth-engine" className="mt-8 inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] font-semibold text-[#2F4D72] hover:text-[#171513]">
             Explore Architecture <ArrowRight size={14}/>
           </Link>
         </div>
         <div className="relative h-[400px] w-full border border-[#B9AD9B]/30 rounded-3xl bg-[#FBF8F0]/40 overflow-hidden flex items-center justify-center">
           <Texture />
-          {/* Visual Metaphor: Signals converging into a central node */}
           <div className="absolute inset-0">
              <svg className="w-full h-full" viewBox="0 0 400 400">
-               {Array.from({ length: 12 }).map((_, i) => (
+               {lines.map((l, i) => (
                  <motion.line
                    key={i}
-                   x1={Math.random() > 0.5 ? 0 : 400}
-                   y1={Math.random() * 400}
+                   x1={l.x1}
+                   y1={l.y1}
                    x2="200"
                    y2="200"
                    stroke="#3D5A80"
@@ -170,7 +167,11 @@ function LayerDecision({ progress }) {
              </svg>
           </div>
           <div className="relative z-10 w-24 h-24 bg-[#EFE9DD] border-2 border-[#2F4D72] rounded-2xl shadow-[0_0_40px_rgba(47,77,114,0.2)] flex items-center justify-center">
-             <div className="w-8 h-8 bg-[#2F4D72] rounded-full animate-pulse" />
+             <motion.div 
+                className="w-8 h-8 bg-[#2F4D72] rounded-full"
+                animate={{ scale: [1, 1.2, 1], opacity: [0.7, 1, 0.7] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+             />
           </div>
         </div>
       </div>
@@ -182,18 +183,21 @@ function LayerAction({ progress }) {
   const opacity = useTransform(progress, [0.35, 0.4, 0.55, 0.6], [0, 1, 1, 0]);
   const y = useTransform(progress, [0.35, 0.4, 0.55, 0.6], [50, 0, 0, -50]);
 
+  const paths = useMemo(() => Array.from({ length: 8 }).map(() => {
+    return `M 200 200 Q ${Math.random() * 400} ${Math.random() * 400} ${Math.random() > 0.5 ? 0 : 400} ${Math.random() > 0.5 ? 0 : 400}`;
+  }), []);
+
   return (
     <motion.div style={{ opacity, y }} className="absolute inset-0 flex items-center justify-center pointer-events-none">
       <div className="grid md:grid-cols-2 gap-20 max-w-7xl px-10 items-center w-full">
         <div className="relative h-[400px] w-full border border-[#B9AD9B]/30 rounded-3xl bg-[#FBF8F0]/40 overflow-hidden flex items-center justify-center">
           <Texture />
-          {/* Visual Metaphor: Actions emanating from the decision node */}
           <div className="absolute inset-0">
              <svg className="w-full h-full" viewBox="0 0 400 400">
-               {Array.from({ length: 8 }).map((_, i) => (
+               {paths.map((d, i) => (
                  <motion.path
                    key={i}
-                   d={`M 200 200 Q ${Math.random() * 400} ${Math.random() * 400} ${Math.random() > 0.5 ? 0 : 400} ${Math.random() > 0.5 ? 0 : 400}`}
+                   d={d}
                    stroke="#2F4D72"
                    strokeWidth="2"
                    strokeOpacity="0.6"
@@ -215,7 +219,7 @@ function LayerAction({ progress }) {
           <p className="mt-6 text-lg leading-8 text-[#4F4A43]">
             Frameworks should not float above reality. They explain what operational systems execute.
           </p>
-          <Link to="/#thinking" className="mt-8 inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] font-semibold text-[#2F4D72] hover:text-[#171513]">
+          <Link to="/thinking/ai-is-not-the-product" className="mt-8 inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] font-semibold text-[#2F4D72] hover:text-[#171513]">
             Read Thinking <ArrowRight size={14}/>
           </Link>
         </div>
@@ -242,7 +246,6 @@ function LayerOutcome({ progress }) {
         </div>
         <div className="relative h-[400px] w-full border border-[#B9AD9B]/30 rounded-3xl bg-[#FBF8F0]/40 overflow-hidden flex items-center justify-center">
           <Texture />
-          {/* Visual Metaphor: Shapes/Targets representing outcomes */}
           <div className="grid grid-cols-2 gap-8 z-10">
             {Array.from({ length: 4 }).map((_, i) => (
               <motion.div 
@@ -271,7 +274,6 @@ function LayerFeedback({ progress }) {
       <div className="grid md:grid-cols-2 gap-20 max-w-7xl px-10 items-center w-full">
         <div className="relative h-[400px] w-full border border-[#B9AD9B]/30 rounded-3xl bg-[#FBF8F0]/40 overflow-hidden flex items-center justify-center">
           <Texture />
-          {/* Visual Metaphor: A massive feedback loop */}
           <svg className="w-full h-full" viewBox="0 0 400 400">
              <motion.path
                d="M 100 200 A 100 100 0 1 1 300 200 A 100 100 0 1 1 100 200"
