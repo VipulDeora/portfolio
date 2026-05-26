@@ -103,13 +103,13 @@ function LayerSignal({ progress }) {
             <motion.div
               key={i}
               className="absolute w-1.5 h-1.5 bg-[#2F4D72] rounded-full"
-              initial={{ x: Math.random() * 400, y: Math.random() * 400, opacity: 0 }}
+              initial={{ x: Math.random() * 400, y: Math.random() * 400, opacity: 0.2 }}
               animate={{ 
                 x: Math.random() * 400, 
                 y: Math.random() * 400,
-                opacity: [0.2, 0.8, 0.2]
+                opacity: 0.8
               }}
-              transition={{ duration: 3 + Math.random() * 2, repeat: Infinity, ease: "linear" }}
+              transition={{ duration: 3 + Math.random() * 2, repeat: Infinity, repeatType: "reverse", ease: "linear" }}
             />
           ))}
         </div>
@@ -284,7 +284,8 @@ function LayerFeedback({ progress }) {
                transition={{ duration: 2, ease: "easeInOut" }}
              />
              <motion.circle cx="300" cy="200" r="8" fill="#171513" 
-                animate={{ rotate: 360, originX: "200px", originY: "200px" }}
+                style={{ transformOrigin: "200px 200px" }}
+                animate={{ rotate: 360 }}
                 transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
              />
           </svg>
