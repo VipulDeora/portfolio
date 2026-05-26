@@ -162,7 +162,7 @@ function Nav() {
           <div className="grid h-8 w-8 place-items-center rounded-full border border-[#AFA391]/80 bg-[#EFE9DD]/75 text-[11px] font-semibold text-[#2F4D72] shadow-[inset_0_1px_0_rgba(255,255,255,0.62)]">
             V
           </div>
-          <div className="text-xs font-semibold uppercase tracking-[0.24em] text-[#171513]">Vipul</div>
+          <div className="text-xs font-semibold uppercase tracking-[0.24em] text-[#171513]">Vipul Deora</div>
         </div>
         <div className="hidden items-center gap-8 md:flex">
           {navItems.map((item) => (
@@ -533,7 +533,7 @@ function ClosingLayer() {
       </div>
       <footer className="relative mx-auto mt-16 max-w-7xl py-8">
         <div className="flex flex-col gap-6 text-[10px] uppercase tracking-[0.26em] text-[#4F4A43] md:flex-row md:items-center md:justify-between">
-          <div>Vipul / decision systems</div>
+          <div>Vipul Deora / decision systems</div>
           <div className="flex gap-6">
             <span>signals</span>
             <span className="text-[#2F4D72]">feedback</span>
