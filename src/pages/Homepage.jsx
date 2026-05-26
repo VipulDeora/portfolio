@@ -263,8 +263,8 @@ function LayerOutcome({ progress }) {
 }
 
 function LayerFeedback({ progress }) {
-  const opacity = useTransform(progress, [0.75, 0.8, 1, 1], [0, 1, 1, 1]); // Stays visible at end
-  const y = useTransform(progress, [0.75, 0.8, 1, 1], [50, 0, 0, 0]);
+  const opacity = useTransform(progress, [0.75, 0.8, 1], [0, 1, 1]); // Stays visible at end
+  const y = useTransform(progress, [0.75, 0.8, 1], [50, 0, 0]);
 
   return (
     <motion.div style={{ opacity, y }} className="absolute inset-0 flex items-center justify-center pointer-events-none">
