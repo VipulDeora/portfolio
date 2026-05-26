@@ -55,30 +55,27 @@ function ProofBridge() {
   const proofs = [
     {
       metric: "5x",
-      description: "increase in transaction frequency via dynamic behavioral clustering.",
+      description: "improvement in transaction frequency via behavioral recommendation models.",
       source: systemsData["portfolio-growth-engine"].name,
       link: "/systems/portfolio-growth-engine"
     },
     {
-      metric: "95%+",
-      description: "automation of messy merchant data resolution using human-in-the-loop ML.",
-      source: systemsData["brand-cleaner"].name,
-      link: "/systems/portfolio-growth-engine" // Fallback since brand cleaner isn't a full page yet
+      metric: "₹1.2Cr",
+      description: "saved in projected implementation costs via a primitives + tenets framework for AI-assisted product development.",
+      source: "AI Product Frameworks",
+      link: "/#experiments" 
     },
     {
-      metric: "0",
-      description: "unbounded economic liability after architecting a central rewards decision engine.",
-      source: systemsData["rewards-decision-engine"].name,
-      link: "/systems/rewards-decision-engine"
+      metric: "75%",
+      description: "reduction in implementation turnaround time through AI-enabled workflow automation.",
+      source: systemsData["connect-ai-copilot"].name,
+      link: "/systems/connect-ai-copilot" // Placeholder for now
     }
   ];
 
   return (
     <section className="relative mx-auto max-w-7xl px-5 py-24 md:px-10 z-20">
-      {/* Continuous Spine Motif connecting through the section */}
-      <div className="absolute top-0 bottom-0 left-5 md:left-[10%] w-px bg-gradient-to-b from-transparent via-[#3D5A80]/30 to-transparent hidden md:block" />
-
-      <div className="md:ml-[15%] max-w-3xl">
+      <div className="md:ml-[15%] max-w-3xl relative z-10">
         <div className="mb-20">
           <h2 className="text-3xl font-semibold leading-[1.1] tracking-[-0.03em] text-[#171513] md:text-4xl">
             Systems only matter if they change the outcome. 
@@ -171,24 +168,30 @@ function LayerSignal() {
     signalsRef.current = Array.from({ length: 40 }).map(() => ({
       x: Math.random() * 400,
       y: Math.random() * 400,
-      dur: 2 + Math.random() * 2,
-      del: Math.random() * 2
+      dur: 2 + Math.random() * 3,
+      del: Math.random() * 3
     }));
   }
   const signals = signalsRef.current;
 
   return (
     <div className="w-full h-full flex items-center justify-center pointer-events-none">
+      <style>{`
+        @keyframes signal-pulse {
+          0%, 100% { transform: scale(0.9); opacity: 0.4; }
+          50% { transform: scale(1.2); opacity: 0.8; box-shadow: 0 0 6px rgba(47,77,114,0.2); }
+        }
+      `}</style>
       <div className="grid md:grid-cols-2 gap-20 max-w-7xl px-10 items-center w-full">
         <div className="relative h-[400px] w-full border border-[#B9AD9B]/30 rounded-3xl bg-[#FBF8F0]/40 overflow-hidden">
           <Texture />
           {signals.map((sig, i) => (
             <div
               key={i}
-              className="absolute w-1.5 h-1.5 bg-[#2F4D72] rounded-full animate-pulse opacity-80"
+              className="absolute w-1.5 h-1.5 bg-[#2F4D72] rounded-full"
               style={{ 
                 left: sig.x, top: sig.y, 
-                animationDuration: `${sig.dur}s`, 
+                animation: `signal-pulse ${sig.dur}s ease-in-out infinite`,
                 animationDelay: `${sig.del}s` 
               }}
             />
@@ -211,9 +214,10 @@ function LayerSignal() {
 function LayerDecision() {
   const linesRef = useRef(null);
   if (!linesRef.current) {
-    linesRef.current = Array.from({ length: 12 }).map(() => ({
-      x1: Math.random() > 0.5 ? 0 : 400,
-      y1: Math.random() * 400
+    linesRef.current = Array.from({ length: 16 }).map(() => ({
+      x1: Math.random() > 0.5 ? (Math.random() > 0.5 ? -50 : 450) : Math.random() * 400,
+      y1: Math.random() > 0.5 ? (Math.random() > 0.5 ? -50 : 450) : Math.random() * 400,
+      delay: Math.random() * 2
     }));
   }
   const lines = linesRef.current;
@@ -221,8 +225,15 @@ function LayerDecision() {
   return (
     <div className="w-full h-full flex items-center justify-center pointer-events-none">
       <style>{`
-        @keyframes flow {
-          to { stroke-dashoffset: 0; }
+        @keyframes converge {
+          0% { stroke-dashoffset: 200; opacity: 0; }
+          20% { opacity: 1; }
+          80% { stroke-dashoffset: 0; opacity: 1; }
+          100% { stroke-dashoffset: 0; opacity: 0; }
+        }
+        @keyframes pulse-core {
+          0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(47,77,114,0.2); }
+          50% { transform: scale(1.15); box-shadow: 0 0 50px rgba(47,77,114,0.6); }
         }
       `}</style>
       <div className="grid md:grid-cols-2 gap-20 max-w-7xl px-10 items-center w-full">
@@ -250,17 +261,20 @@ function LayerDecision() {
                    x2="200"
                    y2="200"
                    stroke="#3D5A80"
-                   strokeWidth="1.5"
-                   strokeOpacity="0.3"
-                   strokeDasharray="4 4"
-                   strokeDashoffset="100"
-                   style={{ animation: "flow 2s linear infinite" }}
+                   strokeWidth="2"
+                   strokeLinecap="round"
+                   strokeDasharray="4 200"
+                   strokeDashoffset="200"
+                   style={{ 
+                     animation: `converge 2.5s ease-in infinite`,
+                     animationDelay: `${l.delay}s`
+                   }}
                  />
                ))}
              </svg>
           </div>
-          <div className="relative z-10 w-24 h-24 bg-[#EFE9DD] border-2 border-[#2F4D72] rounded-2xl shadow-[0_0_40px_rgba(47,77,114,0.2)] flex items-center justify-center">
-             <div className="w-8 h-8 bg-[#2F4D72] rounded-full animate-pulse" />
+          <div className="relative z-10 w-24 h-24 bg-[#EFE9DD] border-2 border-[#2F4D72] rounded-2xl flex items-center justify-center" style={{ animation: 'pulse-core 2.5s ease-in-out infinite' }}>
+             <div className="w-8 h-8 bg-[#2F4D72] rounded-full" />
           </div>
         </div>
       </div>
@@ -271,34 +285,73 @@ function LayerDecision() {
 function LayerAction() {
   const pathsRef = useRef(null);
   if (!pathsRef.current) {
-    pathsRef.current = Array.from({ length: 8 }).map(() => {
-      return `M 200 200 Q ${Math.random() * 400} ${Math.random() * 400} ${Math.random() > 0.5 ? 0 : 400} ${Math.random() > 0.5 ? 0 : 400}`;
+    pathsRef.current = Array.from({ length: 6 }).map((_, i) => {
+      // Distribute evenly in a circle, with slight random jitter
+      const angle = (i / 6) * Math.PI * 2 + (Math.random() * 0.4 - 0.2); 
+      const distance = 350; // Extend well past the edges
+      
+      // End point
+      const x2 = 200 + Math.cos(angle) * distance;
+      const y2 = 200 + Math.sin(angle) * distance;
+      
+      // First control point (1/3rd out, pushed to one side)
+      const r1 = distance * 0.33;
+      const angle1 = angle + 0.6; // Bends left
+      const cx1 = 200 + Math.cos(angle1) * r1;
+      const cy1 = 200 + Math.sin(angle1) * r1;
+
+      // Second control point (2/3rds out, pushed to the opposite side)
+      const r2 = distance * 0.66;
+      const angle2 = angle - 0.6; // Bends right
+      const cx2 = 200 + Math.cos(angle2) * r2;
+      const cy2 = 200 + Math.sin(angle2) * r2;
+
+      return {
+        d: `M 200 200 C ${cx1} ${cy1}, ${cx2} ${cy2}, ${x2} ${y2}`,
+        delay: Math.random() * 4,
+        dur: 8 + Math.random() * 4 // Extremely slow, 8-12 seconds
+      };
     });
   }
   const paths = pathsRef.current;
 
   return (
     <div className="w-full h-full flex items-center justify-center pointer-events-none">
+      <style>{`
+        @keyframes flow-fluid {
+          0% { stroke-dashoffset: 400; opacity: 0; stroke-width: 3; }
+          20% { opacity: 0.8; }
+          50% { stroke-dashoffset: 0; stroke-width: 2; opacity: 0.6; }
+          80% { opacity: 0.4; }
+          100% { stroke-dashoffset: -400; opacity: 0; stroke-width: 1; }
+        }
+      `}</style>
       <div className="grid md:grid-cols-2 gap-20 max-w-7xl px-10 items-center w-full">
         <div className="relative h-[400px] w-full border border-[#B9AD9B]/30 rounded-3xl bg-[#FBF8F0]/40 overflow-hidden flex items-center justify-center">
           <Texture />
           <div className="absolute inset-0">
              <svg className="w-full h-full" viewBox="0 0 400 400">
-               {paths.map((d, i) => (
+               {paths.map((p, i) => (
                  <path
                    key={i}
-                   d={d}
+                   d={p.d}
                    stroke="#2F4D72"
-                   strokeWidth="2"
-                   strokeOpacity="0.6"
+                   strokeOpacity="0.8"
                    fill="none"
-                   className="animate-pulse"
-                   style={{ animationDelay: `${i * 0.15}s`, animationDuration: "2s" }}
+                   strokeDasharray="400 400"
+                   strokeDashoffset="400"
+                   strokeLinecap="round"
+                   style={{ 
+                     animation: `flow-fluid ${p.dur}s ease-in-out infinite`,
+                     animationDelay: `${p.delay}s`
+                   }}
                  />
                ))}
              </svg>
           </div>
-          <div className="relative z-10 w-16 h-16 bg-[#2F4D72] rounded-full shadow-[0_0_30px_rgba(47,77,114,0.4)]" />
+          <div className="relative z-10 w-16 h-16 bg-[#2F4D72] rounded-full shadow-[0_0_40px_rgba(47,77,114,0.6)] flex items-center justify-center">
+            <div className="w-6 h-6 bg-[#F7F4ED]/50 rounded-full animate-pulse" />
+          </div>
         </div>
         <div className="max-w-md pointer-events-auto">
           <div className="text-[10px] uppercase tracking-[0.26em] text-[#2F4D72] mb-4">Thinking</div>
@@ -441,15 +494,13 @@ function AssemblyLine() {
 
 function ClosingLayer() {
   return (
-    <section className="relative mx-auto max-w-7xl px-5 pb-10 pt-20 md:px-10 md:pb-16 z-20 bg-[#F7F4ED]">
-      <div className="relative overflow-hidden rounded-[2.4rem] bg-[#F1EBDD]/68 p-8 shadow-[0_52px_170px_rgba(26,26,24,0.055),inset_0_1px_0_rgba(255,255,255,0.42)] md:p-12">
+    <section className="relative mx-auto max-w-7xl px-5 pb-10 pt-24 md:px-10 md:pb-16 z-20">
+      
+      <div className="relative overflow-hidden rounded-[2.4rem] bg-[#F1EBDD]/68 p-8 shadow-[0_52px_170px_rgba(26,26,24,0.055),inset_0_1px_0_rgba(255,255,255,0.42)] md:p-12 mt-10 md:ml-[15%] max-w-7xl mx-auto z-10">
         <Texture />
         <MaterialLight />
         <div className="relative grid gap-14 md:grid-cols-[0.9fr_1.1fr] md:items-end">
           <div>
-            <div className="mb-8 flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-[#4F4A43]">
-              <Mail size={13} className="text-[#2F4D72]" /> conversation layer
-            </div>
             <h2 className="max-w-xl text-4xl font-semibold leading-[1.03] tracking-[-0.045em] text-[#171513] md:text-6xl">
               If this kind of system is worth exploring, the next loop is conversation.
             </h2>
@@ -468,24 +519,53 @@ function ClosingLayer() {
               <Link to="/thinking/ai-is-not-the-product" className="text-center rounded-full bg-[#FBF8F0]/48 px-5 py-4 text-[10px] uppercase tracking-[0.22em] text-[#4F4A43] hover:bg-[#FBF8F0]/80 transition">
                 Read Essays
               </Link>
-              <a href="mailto:hello@vipuldeora.com" className="text-center rounded-full bg-[#FBF8F0]/48 px-5 py-4 text-[10px] uppercase tracking-[0.22em] text-[#2F4D72] font-semibold hover:bg-[#FBF8F0]/80 transition">
+              <a href="mailto:hello@vipuldeora.com" className="text-center rounded-full bg-[#2F4D72] px-5 py-4 text-[10px] uppercase tracking-[0.22em] text-[#F7F4ED] font-semibold hover:bg-[#203650] shadow-[0_8px_20px_rgba(47,77,114,0.25)] transition-all hover:shadow-[0_8px_25px_rgba(47,77,114,0.4)] hover:-translate-y-0.5">
                 Reach Out
               </a>
             </div>
           </div>
         </div>
       </div>
-      <footer className="relative mx-auto mt-16 max-w-7xl py-8">
-        <div className="flex flex-col gap-6 text-[10px] uppercase tracking-[0.26em] text-[#4F4A43] md:flex-row md:items-center md:justify-between">
-          <div>Vipul Deora / decision systems</div>
-          <div className="flex gap-6">
-            <span>signals</span>
-            <span className="text-[#2F4D72]">feedback</span>
-            <span>next loop</span>
+    </section>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="relative w-full bg-[#2F4D72] py-12 px-5 md:px-10 z-30 overflow-hidden">
+      <style>{`
+        @keyframes footer-radial-ripple {
+          0%, 87% { opacity: 0; transform: translate(-50%, -50%) scale(0.1); }
+          89% { opacity: 0.8; transform: translate(-50%, -50%) scale(0.3); }
+          100% { opacity: 0; transform: translate(-50%, -50%) scale(4); }
+        }
+      `}</style>
+      
+      {/* Container to match SVG boundaries for perfect alignment */}
+      <div className="absolute inset-0 max-w-7xl mx-auto pointer-events-none">
+        {/* The radial light pulse spreading from the point of impact (x=1050/1200 = 87.5%) */}
+        <div 
+          className="absolute top-0 left-[87.5%] w-[800px] h-[800px] mix-blend-screen" 
+          style={{ 
+            background: 'radial-gradient(circle, rgba(166,192,217,0.3) 0%, rgba(166,192,217,0) 65%)',
+            animation: 'footer-radial-ripple 7s infinite cubic-bezier(0.2, 0.8, 0.2, 1)' 
+          }} 
+        />
+      </div>
+
+      <div className="max-w-7xl mx-auto md:ml-[15%] relative z-10">
+        <div className="flex flex-col gap-6 text-[10px] uppercase tracking-[0.26em] text-[#A6C0D9] md:flex-row md:items-center md:justify-between">
+          <div className="text-[#F7F4ED] font-semibold opacity-90">Vipul Deora / Decision Systems</div>
+          <div className="flex flex-col md:flex-row gap-4 md:gap-8 items-start md:items-center">
+            <a href="https://linkedin.com/in/vipul-deora-a80394145" target="_blank" rel="noreferrer" className="text-[#F7F4ED] font-bold border-b border-[#F7F4ED]/30 pb-0.5 hover:text-white hover:border-white transition-colors">
+              LinkedIn
+            </a>
+            <a href="tel:+918447403937" className="hover:text-[#F7F4ED] transition-colors">+91 8447403937</a>
+            <a href="mailto:vipuldeora95@gmail.com" className="hover:text-[#F7F4ED] transition-colors">vipuldeora95@gmail.com</a>
           </div>
         </div>
-      </footer>
-    </section>
+      </div>
+    </footer>
   );
 }
 
@@ -512,6 +592,7 @@ export default function Homepage() {
       <ProofBridge />
       <AssemblyLine />
       <ClosingLayer />
+      <Footer />
     </>
   );
 }

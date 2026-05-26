@@ -18,7 +18,7 @@ import puppeteer from 'puppeteer';
   });
   
   try {
-    await page.goto('http://localhost:5175', { waitUntil: 'domcontentloaded', timeout: 15000 });
+    await page.goto('http://localhost:5174', { waitUntil: 'domcontentloaded', timeout: 15000 });
     const content = await page.evaluate(() => document.body.innerText);
     console.log("=== PAGE CONTENT START ===");
     console.log(content.substring(0, 500) + "...[truncated]");

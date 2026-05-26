@@ -113,20 +113,57 @@ export function Nav() {
 
 export function ContinuousSpine() {
   return (
-    <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-[640px] z-[1] hidden h-[3400px] md:block">
-      <svg className="mx-auto h-full w-full max-w-7xl" viewBox="0 0 1200 3400" fill="none" preserveAspectRatio="none">
-        <path
-          d="M990 0 C830 350 1040 640 735 940 C480 1190 730 1500 420 1780 C190 1990 360 2350 670 2580 C870 2730 760 3160 520 3400"
-          stroke="#171513"
-          strokeOpacity="0.055"
-          strokeWidth="8"
-        />
-        <path
-          d="M990 0 C830 350 1040 640 735 940 C480 1190 730 1500 420 1780 C190 1990 360 2350 670 2580 C870 2730 760 3160 520 3400"
-          stroke="#3D5A80"
-          strokeOpacity="0.16"
-          strokeWidth="1.2"
-        />
+    <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 z-[1] hidden h-[4040px] md:block overflow-hidden">
+      <svg className="mx-auto h-full w-full max-w-7xl" viewBox="0 0 1200 4040" fill="none" preserveAspectRatio="none">
+        <defs>
+          <filter id="glow-ball">
+            <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+          <linearGradient id="grad-1" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="white" stopOpacity="0" />
+            <stop offset="15%" stopColor="white" stopOpacity="1" />
+            <stop offset="70%" stopColor="white" stopOpacity="1" />
+            <stop offset="100%" stopColor="white" stopOpacity="0" />
+          </linearGradient>
+          <mask id="mask-1">
+            <rect x="0" y="300" width="1200" height="1500" fill="url(#grad-1)" />
+          </mask>
+          
+          <linearGradient id="grad-2" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="white" stopOpacity="0" />
+            <stop offset="30%" stopColor="white" stopOpacity="1" />
+            <stop offset="100%" stopColor="white" stopOpacity="1" />
+          </linearGradient>
+          <mask id="mask-2">
+            <rect x="0" y="2440" width="1200" height="800" fill="url(#grad-2)" />
+          </mask>
+        </defs>
+
+        {/* Top Curve - ProofBridge */}
+        <g mask="url(#mask-1)">
+          <path id="spine-1" d="M 1050 300 C 1050 800, 800 1240, 500 1640" stroke="#3D5A80" strokeOpacity="0.3" strokeWidth="2" strokeDasharray="6 8" />
+          <path d="M 1050 300 C 1050 800, 800 1240, 500 1640" stroke="#171513" strokeOpacity="0.05" strokeWidth="8" />
+          <circle r="8" fill="#2F4D72" filter="url(#glow-ball)">
+            <animateMotion dur="6s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1" keyTimes="0; 1">
+              <mpath href="#spine-1" />
+            </animateMotion>
+          </circle>
+        </g>
+
+        {/* Bottom Curve - ClosingLayer */}
+        <g mask="url(#mask-2)">
+          <path id="spine-2" d="M 150 2440 C 150 2840, 500 2940, 1050 3140" stroke="#3D5A80" strokeOpacity="0.3" strokeWidth="2" strokeDasharray="6 8" />
+          <path d="M 150 2440 C 150 2840, 500 2940, 1050 3140" stroke="#171513" strokeOpacity="0.05" strokeWidth="8" />
+          <circle r="8" fill="#2F4D72" filter="url(#glow-ball)">
+            <animateMotion dur="7s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1" keyTimes="0; 1">
+              <mpath href="#spine-2" />
+            </animateMotion>
+          </circle>
+        </g>
       </svg>
     </div>
   );
