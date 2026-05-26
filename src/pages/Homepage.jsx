@@ -1,13 +1,35 @@
-import React, { useRef, useEffect, useMemo } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Mail, ArrowRight } from "lucide-react";
 import { Texture, MaterialLight } from "../components/Shared";
+import { systemsData } from "../data/systems";
 
 function Hero() {
   return (
-    <section className="relative mx-auto min-h-[80vh] max-w-7xl px-5 pt-32 pb-10 md:px-10 flex flex-col justify-center">
-      <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-4xl">
+    <section className="relative mx-auto min-h-[90vh] max-w-7xl px-5 pt-32 pb-24 md:px-10 flex flex-col justify-center">
+      <style>{`
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(18px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .hero-animate {
+          animation: fadeInUp 0.8s ease-out forwards;
+        }
+        @keyframes pulse-flow {
+          0%, 100% { opacity: 0.3; transform: scaleY(0.98); }
+          50% { opacity: 0.8; transform: scaleY(1.02); }
+        }
+      `}</style>
+
+      {/* The Spine Motif */}
+      <div className="absolute top-[65vh] bottom-0 left-5 md:left-[10%] w-px bg-gradient-to-b from-[#2F4D72] via-[#2F4D72]/60 to-transparent flex flex-col items-center justify-between py-8 hidden md:flex" style={{ animation: 'pulse-flow 3s ease-in-out infinite', transformOrigin: 'top' }}>
+        <div className="w-1.5 h-1.5 rounded-full bg-[#2F4D72] -translate-y-1" />
+        <div className="w-1.5 h-1.5 rounded-full bg-[#2F4D72]" />
+        <div className="w-1.5 h-1.5 rounded-full bg-[#2F4D72] translate-y-1" />
+      </div>
+
+      <div className="max-w-4xl opacity-0 hero-animate relative z-10 md:ml-[15%]">
         <div className="mb-9 flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.28em] text-[#2F4D72]">
           <span className="h-px w-12 bg-[#2F4D72]" /> operational ai / decision systems
         </div>
@@ -17,9 +39,76 @@ function Hero() {
         <p className="mt-8 max-w-2xl text-xl leading-9 text-[#332F2A] md:text-2xl md:leading-10">
           Turning messy signals into clearer action across AI, data, and operational workflows.
         </p>
-      </motion.div>
-      <div className="absolute bottom-10 left-5 md:left-10 text-[10px] uppercase tracking-[0.3em] text-[#4F4A43] animate-pulse">
-        Scroll to enter system ↓
+      </div>
+      <div className="absolute bottom-10 left-5 md:left-[15%] text-[10px] uppercase tracking-[0.3em] text-[#4F4A43] animate-pulse">
+        Follow the signal ↓
+      </div>
+    </section>
+  );
+}
+
+// --------------------------------------------------------
+// PROOF BRIDGE (IMPACT METRICS)
+// --------------------------------------------------------
+
+function ProofBridge() {
+  const proofs = [
+    {
+      metric: "5x",
+      description: "increase in transaction frequency via dynamic behavioral clustering.",
+      source: systemsData["portfolio-growth-engine"].name,
+      link: "/systems/portfolio-growth-engine"
+    },
+    {
+      metric: "95%+",
+      description: "automation of messy merchant data resolution using human-in-the-loop ML.",
+      source: systemsData["brand-cleaner"].name,
+      link: "/systems/portfolio-growth-engine" // Fallback since brand cleaner isn't a full page yet
+    },
+    {
+      metric: "0",
+      description: "unbounded economic liability after architecting a central rewards decision engine.",
+      source: systemsData["rewards-decision-engine"].name,
+      link: "/systems/rewards-decision-engine"
+    }
+  ];
+
+  return (
+    <section className="relative mx-auto max-w-7xl px-5 py-24 md:px-10 z-20">
+      {/* Continuous Spine Motif connecting through the section */}
+      <div className="absolute top-0 bottom-0 left-5 md:left-[10%] w-px bg-gradient-to-b from-transparent via-[#3D5A80]/30 to-transparent hidden md:block" />
+
+      <div className="md:ml-[15%] max-w-3xl">
+        <div className="mb-20">
+          <h2 className="text-3xl font-semibold leading-[1.1] tracking-[-0.03em] text-[#171513] md:text-4xl">
+            Systems only matter if they change the outcome. 
+            <span className="text-[#8F8778]"> Theory without execution is just noise.</span>
+          </h2>
+        </div>
+
+        <div className="grid gap-16 md:grid-cols-1">
+          {proofs.map((proof, i) => (
+            <div key={i} className="relative group">
+              {/* Connecting node to spine */}
+              <div className="hidden md:block absolute -left-[5.88%] top-5 w-[5.88%] h-px bg-[#3D5A80]/30 transition-all duration-300 group-hover:bg-[#2F4D72]" />
+              <div className="hidden md:block absolute -left-[5.88%] top-5 w-2 h-2 rounded-full border border-[#2F4D72] bg-[#F7F4ED] -translate-x-1 -translate-y-1/2 transition-transform duration-300 group-hover:scale-150" />
+              
+              <div className="grid md:grid-cols-[120px_1fr] gap-6 items-start">
+                <div className="text-4xl font-semibold tracking-[-0.04em] text-[#2F4D72]">
+                  {proof.metric}
+                </div>
+                <div>
+                  <p className="text-lg leading-7 text-[#171513] mb-4">
+                    {proof.description}
+                  </p>
+                  <Link to={proof.link} className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] font-semibold text-[#8F8778] hover:text-[#171513] transition-colors">
+                    Proof: {proof.source} <ArrowRight size={13} />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -29,47 +118,42 @@ function Hero() {
 // ASSEMBLY LINE SPATIAL LOGIC
 // --------------------------------------------------------
 
-function AssemblySpine({ scrollYProgress }) {
+function AssemblySpine({ activeStep, setActiveStep }) {
   const steps = ["Signal", "Decision", "Action", "Outcome", "Feedback"];
   
   return (
-    <div className="absolute top-12 left-0 right-0 z-20 px-5 md:px-10 max-w-7xl mx-auto">
-      <div className="relative flex justify-between items-center">
-        {/* Animated Background Line */}
+    <div className="relative z-20 px-5 md:px-10 max-w-7xl mx-auto w-full">
+      <div className="relative flex justify-between items-center w-full">
+        {/* Static Background Line */}
         <div className="absolute left-0 right-0 h-px bg-[#3D5A80]/20 top-1/2 -translate-y-1/2 z-0" />
         
-        {/* Progress Line */}
-        <motion.div 
-          className="absolute left-0 h-px bg-[#2F4D72] top-1/2 -translate-y-1/2 z-0"
-          style={{ width: useTransform(scrollYProgress, [0, 1], ["0%", "100%"]) }}
+        {/* Active Progress Line */}
+        <div 
+          className="absolute left-0 h-px bg-[#2F4D72] top-1/2 -translate-y-1/2 z-0 transition-all duration-700 ease-in-out"
+          style={{ width: `${(activeStep / (steps.length - 1)) * 100}%` }}
         />
 
         {steps.map((step, index) => {
-          const stepStart = index * 0.2;
-          const stepEnd = (index + 1) * 0.2;
+          const isActive = index === activeStep;
+          const isPast = index < activeStep;
           
-          const opacity = useTransform(
-            scrollYProgress,
-            [stepStart - 0.1, stepStart, stepEnd, stepEnd + 0.1],
-            [0.3, 1, 1, 0.3]
-          );
-
-          const scale = useTransform(
-            scrollYProgress,
-            [stepStart - 0.1, stepStart, stepEnd, stepEnd + 0.1],
-            [1, 1.1, 1.1, 1]
-          );
-
           return (
-            <motion.div 
+            <button 
               key={step} 
-              className="relative z-10 bg-[#F7F4ED] px-4 py-2 border border-[#B9AD9B]/50 rounded-full shadow-[0_4px_20px_rgba(26,26,24,0.02)]"
-              style={{ opacity, scale }}
+              onClick={() => setActiveStep(index)}
+              className={`relative z-10 px-4 py-2 border rounded-full transition-all duration-500 ease-out flex items-center justify-center cursor-pointer
+                ${isActive 
+                  ? 'bg-[#F7F4ED] border-[#2F4D72] shadow-[0_4px_20px_rgba(47,77,114,0.15)] scale-110' 
+                  : isPast 
+                    ? 'bg-[#EFE9DD] border-[#2F4D72]/40 scale-100 hover:border-[#2F4D72]/80' 
+                    : 'bg-[#F7F4ED] border-[#B9AD9B]/50 scale-95 opacity-60 hover:opacity-100 hover:scale-100'
+                }
+              `}
             >
-              <div className="text-[10px] uppercase tracking-[0.25em] font-semibold text-[#171513]">
+              <div className={`text-[10px] uppercase tracking-[0.25em] font-semibold transition-colors duration-500 ${isActive ? 'text-[#171513]' : 'text-[#4F4A43]'}`}>
                 {step}
               </div>
-            </motion.div>
+            </button>
           );
         })}
       </div>
@@ -81,28 +165,32 @@ function AssemblySpine({ scrollYProgress }) {
 // THE LAYER COMPONENTS (VISUAL METAPHORS)
 // --------------------------------------------------------
 
-function LayerSignal({ progress }) {
-  const opacity = useTransform(progress, [0, 0.05, 0.15, 0.2], [0, 1, 1, 0]);
-  const y = useTransform(progress, [0, 0.05, 0.15, 0.2], [50, 0, 0, -50]);
-  
-  const signals = useMemo(() => Array.from({ length: 40 }).map(() => ({
-    x: Math.random() * 400,
-    y: Math.random() * 400,
-    duration: 3 + Math.random() * 2
-  })), []);
+function LayerSignal() {
+  const signalsRef = useRef(null);
+  if (!signalsRef.current) {
+    signalsRef.current = Array.from({ length: 40 }).map(() => ({
+      x: Math.random() * 400,
+      y: Math.random() * 400,
+      dur: 2 + Math.random() * 2,
+      del: Math.random() * 2
+    }));
+  }
+  const signals = signalsRef.current;
 
   return (
-    <motion.div style={{ opacity, y }} className="absolute inset-0 flex items-center justify-center pointer-events-none">
+    <div className="w-full h-full flex items-center justify-center pointer-events-none">
       <div className="grid md:grid-cols-2 gap-20 max-w-7xl px-10 items-center w-full">
         <div className="relative h-[400px] w-full border border-[#B9AD9B]/30 rounded-3xl bg-[#FBF8F0]/40 overflow-hidden">
           <Texture />
           {signals.map((sig, i) => (
-            <motion.div
+            <div
               key={i}
-              className="absolute w-1.5 h-1.5 bg-[#2F4D72] rounded-full"
-              style={{ left: sig.x, top: sig.y }}
-              animate={{ opacity: [0.2, 0.8, 0.2] }}
-              transition={{ duration: sig.duration, repeat: Infinity, ease: "linear" }}
+              className="absolute w-1.5 h-1.5 bg-[#2F4D72] rounded-full animate-pulse opacity-80"
+              style={{ 
+                left: sig.x, top: sig.y, 
+                animationDuration: `${sig.dur}s`, 
+                animationDelay: `${sig.del}s` 
+              }}
             />
           ))}
         </div>
@@ -116,21 +204,27 @@ function LayerSignal({ progress }) {
           </p>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
-function LayerDecision({ progress }) {
-  const opacity = useTransform(progress, [0.15, 0.2, 0.35, 0.4], [0, 1, 1, 0]);
-  const y = useTransform(progress, [0.15, 0.2, 0.35, 0.4], [50, 0, 0, -50]);
-
-  const lines = useMemo(() => Array.from({ length: 12 }).map(() => ({
-    x1: Math.random() > 0.5 ? 0 : 400,
-    y1: Math.random() * 400
-  })), []);
+function LayerDecision() {
+  const linesRef = useRef(null);
+  if (!linesRef.current) {
+    linesRef.current = Array.from({ length: 12 }).map(() => ({
+      x1: Math.random() > 0.5 ? 0 : 400,
+      y1: Math.random() * 400
+    }));
+  }
+  const lines = linesRef.current;
 
   return (
-    <motion.div style={{ opacity, y }} className="absolute inset-0 flex items-center justify-center pointer-events-none">
+    <div className="w-full h-full flex items-center justify-center pointer-events-none">
+      <style>{`
+        @keyframes flow {
+          to { stroke-dashoffset: 0; }
+        }
+      `}</style>
       <div className="grid md:grid-cols-2 gap-20 max-w-7xl px-10 items-center w-full">
         <div className="max-w-md pointer-events-auto">
           <div className="text-[10px] uppercase tracking-[0.26em] text-[#2F4D72] mb-4">Systems</div>
@@ -149,7 +243,7 @@ function LayerDecision({ progress }) {
           <div className="absolute inset-0">
              <svg className="w-full h-full" viewBox="0 0 400 400">
                {lines.map((l, i) => (
-                 <motion.line
+                 <line
                    key={i}
                    x1={l.x1}
                    y1={l.y1}
@@ -159,52 +253,47 @@ function LayerDecision({ progress }) {
                    strokeWidth="1.5"
                    strokeOpacity="0.3"
                    strokeDasharray="4 4"
-                   initial={{ strokeDashoffset: 100 }}
-                   animate={{ strokeDashoffset: 0 }}
-                   transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                   strokeDashoffset="100"
+                   style={{ animation: "flow 2s linear infinite" }}
                  />
                ))}
              </svg>
           </div>
           <div className="relative z-10 w-24 h-24 bg-[#EFE9DD] border-2 border-[#2F4D72] rounded-2xl shadow-[0_0_40px_rgba(47,77,114,0.2)] flex items-center justify-center">
-             <motion.div 
-                className="w-8 h-8 bg-[#2F4D72] rounded-full"
-                animate={{ scale: [1, 1.2, 1], opacity: [0.7, 1, 0.7] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-             />
+             <div className="w-8 h-8 bg-[#2F4D72] rounded-full animate-pulse" />
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
-function LayerAction({ progress }) {
-  const opacity = useTransform(progress, [0.35, 0.4, 0.55, 0.6], [0, 1, 1, 0]);
-  const y = useTransform(progress, [0.35, 0.4, 0.55, 0.6], [50, 0, 0, -50]);
-
-  const paths = useMemo(() => Array.from({ length: 8 }).map(() => {
-    return `M 200 200 Q ${Math.random() * 400} ${Math.random() * 400} ${Math.random() > 0.5 ? 0 : 400} ${Math.random() > 0.5 ? 0 : 400}`;
-  }), []);
+function LayerAction() {
+  const pathsRef = useRef(null);
+  if (!pathsRef.current) {
+    pathsRef.current = Array.from({ length: 8 }).map(() => {
+      return `M 200 200 Q ${Math.random() * 400} ${Math.random() * 400} ${Math.random() > 0.5 ? 0 : 400} ${Math.random() > 0.5 ? 0 : 400}`;
+    });
+  }
+  const paths = pathsRef.current;
 
   return (
-    <motion.div style={{ opacity, y }} className="absolute inset-0 flex items-center justify-center pointer-events-none">
+    <div className="w-full h-full flex items-center justify-center pointer-events-none">
       <div className="grid md:grid-cols-2 gap-20 max-w-7xl px-10 items-center w-full">
         <div className="relative h-[400px] w-full border border-[#B9AD9B]/30 rounded-3xl bg-[#FBF8F0]/40 overflow-hidden flex items-center justify-center">
           <Texture />
           <div className="absolute inset-0">
              <svg className="w-full h-full" viewBox="0 0 400 400">
                {paths.map((d, i) => (
-                 <motion.path
+                 <path
                    key={i}
                    d={d}
                    stroke="#2F4D72"
                    strokeWidth="2"
                    strokeOpacity="0.6"
                    fill="none"
-                   initial={{ pathLength: 0 }}
-                   animate={{ pathLength: 1 }}
-                   transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse", ease: "easeInOut", delay: i * 0.2 }}
+                   className="animate-pulse"
+                   style={{ animationDelay: `${i * 0.15}s`, animationDuration: "2s" }}
                  />
                ))}
              </svg>
@@ -224,16 +313,13 @@ function LayerAction({ progress }) {
           </Link>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
-function LayerOutcome({ progress }) {
-  const opacity = useTransform(progress, [0.55, 0.6, 0.75, 0.8], [0, 1, 1, 0]);
-  const y = useTransform(progress, [0.55, 0.6, 0.75, 0.8], [50, 0, 0, -50]);
-
+function LayerOutcome() {
   return (
-    <motion.div style={{ opacity, y }} className="absolute inset-0 flex items-center justify-center pointer-events-none">
+    <div className="w-full h-full flex items-center justify-center pointer-events-none">
       <div className="grid md:grid-cols-2 gap-20 max-w-7xl px-10 items-center w-full">
         <div className="max-w-md pointer-events-auto">
           <div className="text-[10px] uppercase tracking-[0.26em] text-[#2F4D72] mb-4">Experiments</div>
@@ -248,47 +334,43 @@ function LayerOutcome({ progress }) {
           <Texture />
           <div className="grid grid-cols-2 gap-8 z-10">
             {Array.from({ length: 4 }).map((_, i) => (
-              <motion.div 
+              <div 
                 key={i}
-                className="w-24 h-24 border-2 border-[#3D5A80]/40 rounded-xl bg-[#EFE9DD] flex items-center justify-center"
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.5, delay: i * 0.2 }}
+                className="w-24 h-24 border-2 border-[#3D5A80]/40 rounded-xl bg-[#EFE9DD] flex items-center justify-center animate-pulse"
+                style={{ animationDelay: `${i * 0.2}s`, animationDuration: '3s' }}
               >
                 <div className={`w-8 h-8 ${i % 2 === 0 ? 'rounded-full' : 'rounded-md'} bg-[#2F4D72]`} />
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
-function LayerFeedback({ progress }) {
-  const opacity = useTransform(progress, [0.75, 0.8, 1], [0, 1, 1]); // Stays visible at end
-  const y = useTransform(progress, [0.75, 0.8, 1], [50, 0, 0]);
-
+function LayerFeedback() {
   return (
-    <motion.div style={{ opacity, y }} className="absolute inset-0 flex items-center justify-center pointer-events-none">
+    <div className="w-full h-full flex items-center justify-center pointer-events-none">
+      <style>{`
+        @keyframes orbit {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+      `}</style>
       <div className="grid md:grid-cols-2 gap-20 max-w-7xl px-10 items-center w-full">
         <div className="relative h-[400px] w-full border border-[#B9AD9B]/30 rounded-3xl bg-[#FBF8F0]/40 overflow-hidden flex items-center justify-center">
           <Texture />
           <svg className="w-full h-full" viewBox="0 0 400 400">
-             <motion.path
+             <path
                d="M 100 200 A 100 100 0 1 1 300 200 A 100 100 0 1 1 100 200"
                stroke="#2F4D72"
                strokeWidth="4"
                strokeOpacity="0.8"
                fill="none"
-               initial={{ pathLength: 0 }}
-               animate={{ pathLength: 1 }}
-               transition={{ duration: 2, ease: "easeInOut" }}
              />
-             <motion.circle cx="300" cy="200" r="8" fill="#171513" 
-                style={{ transformOrigin: "200px 200px" }}
-                animate={{ rotate: 360 }}
-                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+             <circle cx="300" cy="200" r="8" fill="#171513" 
+                style={{ transformOrigin: "200px 200px", animation: "orbit 4s linear infinite" }}
              />
           </svg>
         </div>
@@ -305,33 +387,49 @@ function LayerFeedback({ progress }) {
           </Link>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
 // --------------------------------------------------------
-// THE STICKY ASSEMBLY LINE
+// THE INTERACTIVE ASSEMBLY LINE
 // --------------------------------------------------------
 
 function AssemblyLine() {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  });
+  const [activeStep, setActiveStep] = useState(0);
+
+  const layers = [
+    <LayerSignal key="signal" />,
+    <LayerDecision key="decision" />,
+    <LayerAction key="action" />,
+    <LayerOutcome key="outcome" />,
+    <LayerFeedback key="feedback" />
+  ];
 
   return (
-    <section ref={containerRef} className="relative h-[500vh]">
-      <div className="sticky top-0 h-screen overflow-hidden bg-[#F7F4ED]">
-        <AssemblySpine scrollYProgress={scrollYProgress} />
-        
-        <div className="relative w-full h-full mt-10">
-          <LayerSignal progress={scrollYProgress} />
-          <LayerDecision progress={scrollYProgress} />
-          <LayerAction progress={scrollYProgress} />
-          <LayerOutcome progress={scrollYProgress} />
-          <LayerFeedback progress={scrollYProgress} />
-        </div>
+    <section className="relative w-full py-24 bg-[#F7F4ED] z-10 flex flex-col justify-center">
+      <div className="max-w-7xl mx-auto w-full px-5 md:px-10 mb-16 md:ml-[15%]">
+        <h2 className="text-[10px] uppercase tracking-[0.3em] text-[#4F4A43] mb-4">The Assembly Line</h2>
+        <p className="text-3xl font-semibold leading-[1.1] tracking-[-0.03em] text-[#171513] max-w-2xl">
+          This is how the system operates. Click the nodes below to trace the loop from signal to feedback.
+        </p>
+      </div>
+
+      <AssemblySpine activeStep={activeStep} setActiveStep={setActiveStep} />
+      
+      <div className="relative w-full h-[600px] mt-16 overflow-hidden">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeStep}
+            initial={{ opacity: 0, filter: "blur(8px)", y: 20 }}
+            animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+            exit={{ opacity: 0, filter: "blur(4px)", y: -20 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute inset-0"
+          >
+            {layers[activeStep]}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   );
@@ -343,7 +441,7 @@ function AssemblyLine() {
 
 function ClosingLayer() {
   return (
-    <section className="relative mx-auto max-w-7xl px-5 pb-10 pt-32 md:px-10 md:pb-16 z-20 bg-[#F7F4ED]">
+    <section className="relative mx-auto max-w-7xl px-5 pb-10 pt-20 md:px-10 md:pb-16 z-20 bg-[#F7F4ED]">
       <div className="relative overflow-hidden rounded-[2.4rem] bg-[#F1EBDD]/68 p-8 shadow-[0_52px_170px_rgba(26,26,24,0.055),inset_0_1px_0_rgba(255,255,255,0.42)] md:p-12">
         <Texture />
         <MaterialLight />
@@ -411,6 +509,7 @@ export default function Homepage() {
   return (
     <>
       <Hero />
+      <ProofBridge />
       <AssemblyLine />
       <ClosingLayer />
     </>
