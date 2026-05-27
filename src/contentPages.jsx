@@ -761,7 +761,7 @@ function PageVisual({ variant, title }) {
   const isPhilosophy = variant === "philosophy";
 
   return (
-    <Surface className="min-h-[26rem] p-0" strong>
+    <Surface className="min-h-[18rem] md:min-h-[26rem] p-0" strong>
       <div
         aria-hidden="true"
         className="absolute inset-0 opacity-[0.42]"
@@ -771,7 +771,7 @@ function PageVisual({ variant, title }) {
           backgroundSize: "56px 56px",
         }}
       />
-      <div className="relative h-[26rem] overflow-hidden">
+      <div className="relative h-[18rem] md:h-[26rem] overflow-hidden">
         <svg className="absolute inset-0 h-full w-full" viewBox="0 0 700 430" fill="none">
           {isSystems && (
             <>
@@ -1218,7 +1218,7 @@ function AboutPage() {
       <section className="mx-auto max-w-7xl px-5 pb-20 pt-8 md:px-10 md:pt-12 lg:pb-28">
         <div className="grid gap-10 min-[920px]:grid-cols-[0.42fr_0.58fr] min-[920px]:items-start lg:grid-cols-[0.88fr_1.12fr] lg:gap-12">
           <div className="min-[920px]:sticky min-[920px]:top-24 min-[920px]:h-[calc(100svh-6.5rem)] min-[920px]:self-start">
-            <div className="relative h-[34rem] overflow-hidden rounded-[2.2rem] border border-[#B9AD9B]/44 bg-[#171513] shadow-[0_38px_130px_rgba(26,26,24,0.16)] min-[920px]:h-full">
+            <div className="relative h-[22rem] md:h-[34rem] overflow-hidden rounded-[2.2rem] border border-[#B9AD9B]/44 bg-[#171513] shadow-[0_38px_130px_rgba(26,26,24,0.16)] min-[920px]:h-full">
               <img src={profileImage} alt="Vipul Deora" className="h-full w-full object-cover object-[50%_36%] opacity-95" />
               <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(23,21,19,0)_42%,rgba(23,21,19,0.72)_100%)]" />
               <div className="absolute bottom-6 left-6 right-6 flex flex-wrap gap-3">
@@ -1229,7 +1229,7 @@ function AboutPage() {
           </div>
 
           <div className="space-y-14 lg:space-y-16 lg:pt-4">
-            <div className="flex min-h-[34rem] flex-col justify-center min-[920px]:min-h-[calc(100svh-6.5rem)]">
+            <div className="flex min-h-[22rem] md:min-h-[34rem] flex-col justify-center min-[920px]:min-h-[calc(100svh-6.5rem)]">
               <h1 className="max-w-4xl text-4xl font-semibold leading-[0.94] tracking-[-0.06em] text-[#171513] md:text-5xl lg:text-6xl xl:text-[4.55rem]">
                 Product manager for AI-driven decision systems and data products.
               </h1>

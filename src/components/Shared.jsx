@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X } from "lucide-react";
 
 export function PaperBackground() {
   return (
@@ -82,16 +84,19 @@ const navItems = [
 export function Nav() {
   const location = useLocation();
   const isHome = location.pathname === "/";
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="sticky top-0 z-40 bg-[#FBF8F0]/88 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 md:px-10">
-        <Link to="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+        <Link to="/" onClick={() => setIsOpen(false)} className="flex items-center gap-3 hover:opacity-80 transition-opacity">
           <div className="grid h-8 w-8 place-items-center rounded-full border border-[#AFA391]/80 bg-[#EFE9DD]/75 text-[11px] font-semibold text-[#2F4D72] shadow-[inset_0_1px_0_rgba(255,255,255,0.62)]">
             V
           </div>
           <div className="text-xs font-semibold uppercase tracking-[0.24em] text-[#171513]">Vipul Deora</div>
         </Link>
+        
+        {/* Desktop Nav */}
         <div className="hidden items-center gap-8 md:flex">
           {navItems.map((item) => {
             const isAnchor = item.path.startsWith("/#");
@@ -108,7 +113,56 @@ export function Nav() {
             )
           })}
         </div>
+
+        {/* Mobile Toggle */}
+        <button 
+          className="md:hidden p-2 text-[#4F4A43] hover:text-[#171513] transition-colors"
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label="Toggle menu"
+        >
+          {isOpen ? <X size={20} /> : <Menu size={20} />}
+        </button>
       </div>
+
+      {/* Mobile Nav Overlay */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div 
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="md:hidden overflow-hidden border-t border-[#B9AD9B]/30 bg-[#FBF8F0]"
+          >
+            <div className="flex flex-col px-5 py-6 gap-6">
+              {navItems.map((item) => {
+                const isAnchor = item.path.startsWith("/#");
+                const href = isAnchor && !isHome ? item.path : item.path.replace("/#", "#");
+                
+                return isAnchor && isHome ? (
+                  <a 
+                    key={item.label} 
+                    href={href} 
+                    onClick={() => setIsOpen(false)}
+                    className="text-[12px] uppercase tracking-[0.24em] font-semibold text-[#171513] transition hover:text-[#2F4D72]"
+                  >
+                    {item.label}
+                  </a>
+                ) : (
+                  <Link 
+                    key={item.label} 
+                    to={item.path} 
+                    onClick={() => setIsOpen(false)}
+                    className="text-[12px] uppercase tracking-[0.24em] font-semibold text-[#171513] transition hover:text-[#2F4D72]"
+                  >
+                    {item.label}
+                  </Link>
+                )
+              })}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

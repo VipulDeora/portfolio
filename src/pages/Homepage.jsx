@@ -33,7 +33,7 @@ function Hero() {
         <div className="mb-9 flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.28em] text-[#2F4D72]">
           <span className="h-px w-12 bg-[#2F4D72]" /> operational ai / decision systems
         </div>
-        <h1 className="text-6xl font-semibold leading-[0.94] tracking-[-0.045em] text-[#171513] md:text-7xl lg:text-[5.5rem]">
+        <h1 className="text-5xl font-semibold leading-[1] tracking-[-0.045em] text-[#171513] md:text-7xl lg:text-[5.5rem] md:leading-[0.94]">
           I design systems for better decisions.
         </h1>
         <p className="mt-8 max-w-2xl text-xl leading-9 text-[#332F2A] md:text-2xl md:leading-10">
@@ -131,8 +131,8 @@ function AssemblySpine({ activeStep, setActiveStep }) {
   const steps = ["Signal", "Decision", "Action", "Outcome", "Feedback"];
   
   return (
-    <div className="relative z-20 px-5 md:px-10 max-w-7xl mx-auto w-full">
-      <div className="relative flex justify-between items-center w-full">
+    <div className="relative z-20 px-5 md:px-10 max-w-7xl mx-auto w-full overflow-x-auto pb-6 -mb-6 snap-x">
+      <div className="relative flex justify-between items-center w-full min-w-[600px] md:min-w-full px-2">
         {/* Static Background Line */}
         <div className="absolute left-0 right-0 h-px bg-[#3D5A80]/20 top-1/2 -translate-y-1/2 z-0" />
         
@@ -194,8 +194,8 @@ function LayerSignal() {
           50% { transform: scale(1.2); opacity: 0.8; box-shadow: 0 0 6px rgba(47,77,114,0.2); }
         }
       `}</style>
-      <div className="grid md:grid-cols-2 gap-20 max-w-7xl px-10 items-center w-full">
-        <div className="relative h-[400px] w-full border border-[#B9AD9B]/30 rounded-3xl bg-[#FBF8F0]/40 overflow-hidden">
+      <div className="grid md:grid-cols-2 gap-10 md:gap-20 max-w-7xl px-5 md:px-10 items-center w-full">
+        <div className="relative h-[300px] md:h-[400px] w-full border border-[#B9AD9B]/30 rounded-3xl bg-[#FBF8F0]/40 overflow-hidden">
           <Texture />
           {signals.map((sig, i) => (
             <div
@@ -248,7 +248,7 @@ function LayerDecision() {
           50% { transform: scale(1.15); box-shadow: 0 0 50px rgba(47,77,114,0.6); }
         }
       `}</style>
-      <div className="grid md:grid-cols-2 gap-20 max-w-7xl px-10 items-center w-full">
+      <div className="grid md:grid-cols-2 gap-10 md:gap-20 max-w-7xl px-5 md:px-10 items-center w-full">
         <div className="max-w-md pointer-events-auto">
           <div className="text-[10px] uppercase tracking-[0.26em] text-[#2F4D72] mb-4">Systems</div>
           <h2 className="text-4xl font-semibold leading-[1.05] tracking-[-0.04em] text-[#171513]">
@@ -261,7 +261,7 @@ function LayerDecision() {
             Explore Architecture <ArrowRight size={14}/>
           </Link>
         </div>
-        <div className="relative h-[400px] w-full border border-[#B9AD9B]/30 rounded-3xl bg-[#FBF8F0]/40 overflow-hidden flex items-center justify-center">
+        <div className="relative h-[300px] md:h-[400px] w-full border border-[#B9AD9B]/30 rounded-3xl bg-[#FBF8F0]/40 overflow-hidden flex items-center justify-center">
           <Texture />
           <div className="absolute inset-0">
              <svg className="w-full h-full" viewBox="0 0 400 400">
@@ -338,8 +338,8 @@ function LayerAction() {
           100% { stroke-dashoffset: -400; opacity: 0; stroke-width: 1; }
         }
       `}</style>
-      <div className="grid md:grid-cols-2 gap-20 max-w-7xl px-10 items-center w-full">
-        <div className="relative h-[400px] w-full border border-[#B9AD9B]/30 rounded-3xl bg-[#FBF8F0]/40 overflow-hidden flex items-center justify-center">
+      <div className="grid md:grid-cols-2 gap-10 md:gap-20 max-w-7xl px-5 md:px-10 items-center w-full">
+        <div className="relative h-[300px] md:h-[400px] w-full border border-[#B9AD9B]/30 rounded-3xl bg-[#FBF8F0]/40 overflow-hidden flex items-center justify-center">
           <Texture />
           <div className="absolute inset-0">
              <svg className="w-full h-full" viewBox="0 0 400 400">
@@ -385,7 +385,7 @@ function LayerAction() {
 function LayerOutcome() {
   return (
     <div className="w-full h-full flex items-center justify-center pointer-events-none">
-      <div className="grid md:grid-cols-2 gap-20 max-w-7xl px-10 items-center w-full">
+      <div className="grid md:grid-cols-2 gap-10 md:gap-20 max-w-7xl px-5 md:px-10 items-center w-full">
         <div className="max-w-md pointer-events-auto">
           <div className="text-[10px] uppercase tracking-[0.26em] text-[#2F4D72] mb-4">Experiments</div>
           <h2 className="text-4xl font-semibold leading-[1.05] tracking-[-0.04em] text-[#171513]">
@@ -395,7 +395,7 @@ function LayerOutcome() {
             The unfinished edge matters. Experiments are where ideas are stress-tested before becoming architecture.
           </p>
         </div>
-        <div className="relative h-[400px] w-full border border-[#B9AD9B]/30 rounded-3xl bg-[#FBF8F0]/40 overflow-hidden flex items-center justify-center">
+        <div className="relative h-[300px] md:h-[400px] w-full border border-[#B9AD9B]/30 rounded-3xl bg-[#FBF8F0]/40 overflow-hidden flex items-center justify-center">
           <Texture />
           <div className="grid grid-cols-2 gap-8 z-10">
             {Array.from({ length: 4 }).map((_, i) => (
@@ -423,8 +423,8 @@ function LayerFeedback() {
           to { transform: rotate(360deg); }
         }
       `}</style>
-      <div className="grid md:grid-cols-2 gap-20 max-w-7xl px-10 items-center w-full">
-        <div className="relative h-[400px] w-full border border-[#B9AD9B]/30 rounded-3xl bg-[#FBF8F0]/40 overflow-hidden flex items-center justify-center">
+      <div className="grid md:grid-cols-2 gap-10 md:gap-20 max-w-7xl px-5 md:px-10 items-center w-full">
+        <div className="relative h-[300px] md:h-[400px] w-full border border-[#B9AD9B]/30 rounded-3xl bg-[#FBF8F0]/40 overflow-hidden flex items-center justify-center">
           <Texture />
           <svg className="w-full h-full" viewBox="0 0 400 400">
              <path
@@ -499,7 +499,7 @@ function AssemblyLine() {
 
       <AssemblySpine activeStep={activeStep} setActiveStep={setActiveStep} />
       
-      <div className="relative w-full h-[600px] mt-16 overflow-hidden">
+      <div className="relative w-full h-[750px] md:h-[600px] mt-16 overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.div
             key={activeStep}
