@@ -169,6 +169,26 @@ export function ContinuousSpine() {
   );
 }
 
+export function MobileSpine() {
+  return (
+    <div aria-hidden="true" className="pointer-events-none fixed inset-y-0 left-4 md:left-5 z-[5] md:hidden w-px">
+      <style>{`
+        @keyframes mobile-scanline {
+          0% { top: -10%; opacity: 0; }
+          10% { opacity: 1; }
+          90% { opacity: 1; }
+          100% { top: 110%; opacity: 0; }
+        }
+      `}</style>
+      <div className="absolute inset-y-0 left-0 w-full bg-gradient-to-b from-transparent via-[#3D5A80]/30 to-transparent" />
+      <div 
+        className="absolute left-1/2 -translate-x-1/2 w-[2px] h-24 bg-gradient-to-b from-transparent via-[#2F4D72] to-transparent shadow-[0_0_10px_rgba(47,77,114,0.8)]"
+        style={{ animation: 'mobile-scanline 6s ease-in-out infinite' }}
+      />
+    </div>
+  );
+}
+
 export function SectionMark({ number, label, principle, next }) {
   return (
     <div className="mb-12 md:mb-16">

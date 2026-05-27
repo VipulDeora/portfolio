@@ -1,8 +1,8 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import { Mail, ArrowRight } from "lucide-react";
-import { Texture, MaterialLight } from "../components/Shared";
+import { Texture, MaterialLight, MobileSpine } from "../components/Shared";
 import { systemsData } from "../data/systems";
 
 function Hero() {
@@ -76,12 +76,18 @@ function ProofBridge() {
   return (
     <section className="relative mx-auto max-w-7xl px-5 py-24 md:px-10 z-20">
       <div className="md:ml-[15%] max-w-3xl relative z-10">
-        <div className="mb-20">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.8 }}
+          className="mb-20"
+        >
           <h2 className="text-3xl font-semibold leading-[1.1] tracking-[-0.03em] text-[#171513] md:text-4xl">
             Systems only matter if they change the outcome. 
             <span className="text-[#8F8778]"> Theory without execution is just noise.</span>
           </h2>
-        </div>
+        </motion.div>
 
         <div className="grid gap-16 md:grid-cols-1">
           {proofs.map((proof, i) => (
@@ -90,7 +96,13 @@ function ProofBridge() {
               <div className="hidden md:block absolute -left-[5.88%] top-5 w-[5.88%] h-px bg-[#3D5A80]/30 transition-all duration-300 group-hover:bg-[#2F4D72]" />
               <div className="hidden md:block absolute -left-[5.88%] top-5 w-2 h-2 rounded-full border border-[#2F4D72] bg-[#F7F4ED] -translate-x-1 -translate-y-1/2 transition-transform duration-300 group-hover:scale-150" />
               
-              <div className="grid md:grid-cols-[120px_1fr] gap-6 items-start">
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.6, delay: i * 0.15 }}
+                className="grid md:grid-cols-[120px_1fr] gap-6 items-start"
+              >
                 <div className="text-4xl font-semibold tracking-[-0.04em] text-[#2F4D72]">
                   {proof.metric}
                 </div>
@@ -102,7 +114,7 @@ function ProofBridge() {
                     Proof: {proof.source} <ArrowRight size={13} />
                   </Link>
                 </div>
-              </div>
+              </motion.div>
             </div>
           ))}
         </div>
@@ -450,6 +462,17 @@ function LayerFeedback() {
 
 function AssemblyLine() {
   const [activeStep, setActiveStep] = useState(0);
+  const containerRef = useRef(null);
+  const isInView = useInView(containerRef, { margin: "-20%" });
+
+  useEffect(() => {
+    if (!isInView) return;
+    
+    const timer = setTimeout(() => {
+      setActiveStep((prev) => (prev + 1) % 5);
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, [activeStep, isInView]);
 
   const layers = [
     <LayerSignal key="signal" />,
@@ -460,13 +483,19 @@ function AssemblyLine() {
   ];
 
   return (
-    <section className="relative w-full py-24 bg-[#F7F4ED] z-10 flex flex-col justify-center">
-      <div className="max-w-7xl mx-auto w-full px-5 md:px-10 mb-16 md:ml-[15%]">
+    <section ref={containerRef} className="relative w-full py-24 bg-[#F7F4ED] z-10 flex flex-col justify-center">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.8 }}
+        className="max-w-7xl mx-auto w-full px-5 md:px-10 mb-16 md:ml-[15%]"
+      >
         <h2 className="text-[10px] uppercase tracking-[0.3em] text-[#4F4A43] mb-4">The Assembly Line</h2>
         <p className="text-3xl font-semibold leading-[1.1] tracking-[-0.03em] text-[#171513] max-w-2xl">
           This is how the system operates. Click the nodes below to trace the loop from signal to feedback.
         </p>
-      </div>
+      </motion.div>
 
       <AssemblySpine activeStep={activeStep} setActiveStep={setActiveStep} />
       
@@ -500,12 +529,23 @@ function ClosingLayer() {
         <Texture />
         <MaterialLight />
         <div className="relative grid gap-14 md:grid-cols-[0.9fr_1.1fr] md:items-end">
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.8 }}
+          >
             <h2 className="max-w-xl text-4xl font-semibold leading-[1.03] tracking-[-0.045em] text-[#171513] md:text-6xl">
               If this kind of system is worth exploring, the next loop is conversation.
             </h2>
-          </div>
-          <div className="grid gap-5">
+          </motion.div>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="grid gap-5"
+          >
             <div className="rounded-[1.5rem] bg-[#FBF8F0]/58 p-6 shadow-[0_18px_60px_rgba(26,26,24,0.028)]">
               <div className="mb-5 text-[10px] uppercase tracking-[0.28em] text-[#4F4A43]">continue</div>
               <p className="max-w-md text-lg leading-8 text-[#3B3731]">
@@ -523,7 +563,7 @@ function ClosingLayer() {
                 Reach Out
               </a>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
@@ -588,6 +628,7 @@ export default function Homepage() {
 
   return (
     <>
+      <MobileSpine />
       <Hero />
       <ProofBridge />
       <AssemblyLine />
