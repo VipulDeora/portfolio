@@ -72,8 +72,10 @@ export function GridLayer() {
 }
 
 const navItems = [
-  { label: "Systems", path: "/systems/portfolio-growth-engine" },
-  { label: "Thinking", path: "/thinking/ai-is-not-the-product" },
+  { label: "Systems", path: "/systems" },
+  { label: "Thinking", path: "/thinking" },
+  { label: "Experiments", path: "/experiments" },
+  { label: "Philosophy", path: "/philosophy" },
   { label: "About", path: "/about" }
 ];
 

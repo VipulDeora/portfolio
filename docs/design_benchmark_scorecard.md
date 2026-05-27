@@ -146,7 +146,7 @@ The hero should use:
 - No explanatory sub-grid.
 - No repeated concept labels unless they add navigation or proof.
 
-### Production Pass V2
+### Production Pass V3
 
 Category cue:
 
@@ -154,27 +154,31 @@ Operational AI / Decision Systems
 
 Thesis:
 
-Turn messy signals into better decisions.
+I build systems that turn signals into better decisions.
 
 Support:
 
-I design AI, data, and workflow systems that help teams act faster, learn from outcomes, and improve the next decision.
+Across AI, data, and workflows, I make intelligence operational: clear choices, faster action, measurable feedback.
 
 Primary actions:
 
-- Explore systems
+- See systems
 - Read thinking
 
-Supporting asset:
+Micro-structure:
 
-A darker accent-blue decision field using signal, decision, and outcome states. The asset is intentionally higher contrast than the paper background so the hero no longer collapses into beige-on-beige haze.
+Signal → Decision → Action → Outcome → Feedback
+
+Supporting asset decision:
+
+Retire the large hero diagram. It was visually stronger than the original pale version, but it did not earn its first-viewport real estate. The micro-structure now carries the systems concept directly and previews the homepage spine without requiring an explanatory label.
 
 ### Why This Is Better
 
 - Shorter and more direct than "I build systems that turn messy signals into clearer decisions."
-- Makes "better decisions" the emphasized outcome and uses the accent color for meaning, not decoration.
+- Makes "better decisions" the emphasized outcome and uses accent color only for decision meaning and primary interaction.
 - Gives the hero a real action path without adding explanatory clutter.
-- Replaces the washed-out pale diagram with a high-contrast blue decision-field asset.
+- Replaces the washed-out diagram pattern with semantic text structure, stronger contrast, and tighter first-viewport composition.
 - Preserves the positioning around AI, data, workflow, speed, learning, and measurable outcomes.
 - Makes the hero behave more like a clarity demonstration than a concept explanation.
 
@@ -182,11 +186,46 @@ A darker accent-blue decision field using signal, decision, and outcome states. 
 
 Corrected baseline: 6.5/10
 
-After Production Pass V2: 8/10
+After Production Pass V3: 8/10
 
 Remaining path to 10/10:
 
-- Make the supporting visual feel even more like a unique proprietary artifact, less like an abstract systems diagram.
-- Improve the asset's meaning without adding more labels.
+- Decide whether a future hero artifact can add proprietary meaning without stealing attention from the thesis.
+- Continue tuning contrast and first-viewport proportions on real laptop and mobile screens.
 - Tune the hero after adjacent sections are rewritten so the first transition feels inevitable.
 - Re-evaluate the CTA pair once the Systems and Thinking sections have production copy.
+
+### Production Pass V4
+
+Hero thesis:
+
+Systems for better decisions.
+
+Core design move:
+
+Move the spine out of the hero and into a pinned operating-loop assembly immediately after the hero.
+
+Layer mapping:
+
+- Identity → Signal
+- Systems → Decision
+- Thinking → Action
+- Experiments → Outcome
+- Philosophy → Feedback
+
+Why this changes the benchmark:
+
+- The hero no longer carries the whole explanation in words.
+- The first scroll becomes the website's signature visual move.
+- Section rhythm comes from state progression rather than disconnected blocks.
+- The spine becomes structural: it highlights, advances, and connects each layer.
+- Motion is scroll-driven, so it expresses assembly rather than decoration.
+
+After Production Pass V4: 8.6/10
+
+Remaining path to 10/10:
+
+- Tune the exact layer visuals after live review so each transition feels inevitable.
+- Strengthen the Systems → Decision transition with more specific proof behavior.
+- Add a reduced-motion fallback that preserves state clarity without pinned animation.
+- Re-evaluate mobile pacing once the assembly is tested on an actual phone.

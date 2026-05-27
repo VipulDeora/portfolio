@@ -2,9 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { PaperBackground, ContinuousSpine, Nav } from "./components/Shared";
 import Homepage from "./pages/Homepage";
-import CaseStudy from "./pages/systems/CaseStudy";
-import Essay from "./pages/thinking/Essay";
-import About from "./pages/About";
+import { ContentRouter } from "./contentPages";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -20,7 +18,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
-      <main className="relative min-h-screen overflow-hidden bg-[#F7F4ED] font-sans text-[#171513]">
+      <main className="relative min-h-screen overflow-x-clip bg-[#F7F4ED] font-sans text-[#171513]">
         <PaperBackground />
         <ContinuousSpine />
         <div className="relative z-10 flex flex-col min-h-screen">
@@ -28,9 +26,7 @@ export default function App() {
           <div className="flex-grow">
             <Routes>
               <Route path="/" element={<Homepage />} />
-              <Route path="/systems/:slug" element={<CaseStudy />} />
-              <Route path="/thinking/:slug" element={<Essay />} />
-              <Route path="/about" element={<About />} />
+              <Route path="/*" element={<ContentRouter />} />
             </Routes>
           </div>
         </div>

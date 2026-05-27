@@ -95,9 +95,68 @@ This is clear and professional, but it risks sounding closer to a conventional p
 
 ## Selected Direction
 
-Use Version A as the production direction.
+Use a type-led operating-loop hero as the production direction.
 
 Reason:
 
-It best matches the artifacts: restrained, operational, clear, human, systems-oriented, and not portfolio-like. It also gives the design room to create contrast without making accent blue the dominant surface.
+The right-side artifact consumed too much first-viewport real estate for too little semantic return. The stronger direction is a single editorial hero with one thesis, one supporting line, and a compact operating loop that carries the systems idea without becoming decorative.
 
+## Production Direction: Type-Led Operating Loop
+
+Eyebrow:
+
+Operational AI / Decision Systems
+
+Thesis:
+
+I build systems that turn signals into better decisions.
+
+Support:
+
+Across AI, data, and workflows, I make intelligence operational: clear choices, faster action, measurable feedback.
+
+Micro-structure:
+
+Signal → Decision → Action → Outcome → Feedback
+
+Why it fits:
+
+- It makes the first read faster and more decisive.
+- It removes the unlabeled diagram instead of forcing a label onto weak meaning.
+- It uses accent blue only as a decision cue and primary interaction cue.
+- It creates depth through hierarchy, contrast, paper tone, and spatial restraint rather than a large visual panel.
+- It previews the homepage spine while preserving the hero as a calm identity/reflection field.
+
+## Production Direction V4: Threshold + Pinned Assembly
+
+Hero:
+
+Systems for better decisions.
+
+Hero role:
+
+The hero should act as a threshold, not the full explanation. It uses one claim and a quiet signal-to-decision field so the key idea is felt visually before it is described.
+
+Post-hero mechanism:
+
+The spine moves out of the hero and becomes a pinned operating-loop assembly on the next scroll.
+
+Layer mapping:
+
+- Identity → Signal
+- Systems → Decision
+- Thinking → Action
+- Experiments → Outcome
+- Philosophy → Feedback
+
+Interaction principle:
+
+Scrolling should not simply move the page. It should advance the system. The top spine highlights the active element while the lower layer gives way to the next layer through scroll-driven motion.
+
+Why this is stronger:
+
+- It reduces hero wording instead of compressing more copy into the first viewport.
+- It turns the site into a system unfolding, matching the core artifact direction.
+- It makes the spine structural, not decorative.
+- It creates rhythm through state change, not stacked section repetition.
+- It gives each homepage layer a role in the operating loop.
