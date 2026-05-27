@@ -523,7 +523,7 @@ function AssemblyLine() {
 
 function ClosingLayer() {
   return (
-    <section className="relative mx-auto max-w-7xl px-5 pb-10 pt-24 md:px-10 md:pb-16 z-20">
+    <section className="relative mx-auto max-w-7xl px-5 pt-24 md:px-10 z-20">
       
       <div className="relative overflow-hidden rounded-[2.4rem] bg-[#F1EBDD]/68 p-8 shadow-[0_52px_170px_rgba(26,26,24,0.055),inset_0_1px_0_rgba(255,255,255,0.42)] md:p-12 mt-10 md:ml-[15%] max-w-7xl mx-auto z-10">
         <Texture />

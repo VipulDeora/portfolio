@@ -115,7 +115,7 @@ export function Nav() {
 
 export function ContinuousSpine() {
   return (
-    <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 z-[1] hidden h-[4040px] md:block overflow-hidden">
+    <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 bottom-0 z-[1] hidden md:block overflow-hidden">
       <svg className="mx-auto h-full w-full max-w-7xl" viewBox="0 0 1200 4040" fill="none" preserveAspectRatio="none">
         <defs>
           <filter id="glow-ball">
