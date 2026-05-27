@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import { PaperBackground, ContinuousSpine, Nav } from "./components/Shared";
+import { PaperBackground, Nav } from "./components/Shared";
 import Homepage from "./pages/Homepage";
 import { ContentRouter } from "./contentPages";
 
@@ -20,7 +20,7 @@ export default function App() {
       <ScrollToTop />
       <main className="relative min-h-screen overflow-x-clip bg-[#F7F4ED] font-sans text-[#171513]">
         <PaperBackground />
-        <ContinuousSpine />
+
         <div className="relative z-10 flex flex-col min-h-screen">
           <Nav />
           <div className="flex-grow">

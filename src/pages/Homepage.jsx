@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { Mail, ArrowRight } from "lucide-react";
-import { Texture, MaterialLight, MobileSpine } from "../components/Shared";
+import { Texture, MaterialLight, MobileSpine, ContinuousSpine } from "../components/Shared";
 import { systemsData } from "../data/systems";
 
 function Hero() {
@@ -628,6 +628,7 @@ export default function Homepage() {
 
   return (
     <>
+      <ContinuousSpine />
       <MobileSpine />
       <Hero />
       <ProofBridge />
